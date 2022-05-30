@@ -61,24 +61,37 @@
 
       /* ReactDOM.render(element, rootElement); */
 
-      function Button({ number }) {
+      /* 외부에서 state를 받는 경우
+      const state = { name: "button", color: "pink" };
+
+      function Button({ name, color }) {
         return (
-          <button
-            style={{ backgroundColor: number % 2 == 0 ? "pink" : "green" }}
-          >
-            {number}
+          <button style={{ backgroundColor: color }}>
+            {color}
+            {name}
+          </button>
+        );
+      }
+      */
+
+      // 내부에서 state를 설정하는 경우
+      function Button() {
+        const [color, setColor] = React.useState("green");
+        const [name, setName] = React.useState("button");
+        return (
+          <button style={{ backgroundColor: color }}>
+            {color}
+            {name}
           </button>
         );
       }
 
       const Buttons = () => (
         <>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <Button number={4} />
-          <Button number={5} />
-          <Button number={6} />
+          <button style={{ backgroundColor: state.color }}>
+            {state.color + state.name}
+          </button>
+          <Button name={state.name} color={state.color} />
         </>
       );
 
