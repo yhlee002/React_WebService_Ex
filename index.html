@@ -37,12 +37,22 @@
 
       function Buttons() {
         const [textColor, setTextColor] = React.useState("black");
-        console.log("textColor", textColor); // setTextColor 함수 호출 시 마다 호출됨에 유의
+        const [newState, setNewState] = React.useState([
+          { key: 0, color: "pink" },
+          { key: 1, color: "blue" },
+          { key: 2, color: "green" }
+        ]);
         return (
           <>
-            <Button color="pink" onClickButton={setTextColor} />
-            <Button color="blue" onClickButton={setTextColor} />
-            <Button color="green" onClickButton={setTextColor} />
+            {newState.map((button) => {
+              return (
+                <Button
+                  key={button.key}
+                  color={button.color}
+                  onClickButton={setTextColor}
+                />
+              );
+            })}
             <h1 style={{ color: textColor }}>color</h1>
           </>
         );
