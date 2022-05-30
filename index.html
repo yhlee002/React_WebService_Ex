@@ -18,36 +18,31 @@
       const rootElement = document.getElementById("root");
       const element = <Buttons />;
 
-      function Buttons() {
-        // h1 태그의 글자를 바꿔주는 변수값
-        const [textColor, setTextColor] = React.useState("black");
-
+      const Button = ({ color, onClickButton }) => {
         // 버튼 클릭 시 실행되는 함수
         const handleClickButton = (color) => {
-          console.log("color", color);
-          setTextColor(color);
+          // 상위 Component의 setTextColor 함수 호출
+          onClickButton(color);
         };
 
         return (
+          <button
+            onClick={() => handleClickButton(color)}
+            style={{ backgroundColor: color }}
+          >
+            {color}Button
+          </button>
+        );
+      };
+
+      function Buttons() {
+        const [textColor, setTextColor] = React.useState("black");
+        console.log("textColor", textColor); // setTextColor 함수 호출 시 마다 호출됨에 유의
+        return (
           <>
-            <button
-              onClick={() => handleClickButton("pink")}
-              style={{ backgroundColor: "pink" }}
-            >
-              pinkButton
-            </button>
-            <button
-              onClick={() => handleClickButton("blue")}
-              style={{ backgroundColor: "blue" }}
-            >
-              pinkButton
-            </button>
-            <button
-              onClick={() => handleClickButton("green")}
-              style={{ backgroundColor: "green" }}
-            >
-              pinkButton
-            </button>
+            <Button color="pink" onClickButton={setTextColor} />
+            <Button color="blue" onClickButton={setTextColor} />
+            <Button color="green" onClickButton={setTextColor} />
             <h1 style={{ color: textColor }}>color</h1>
           </>
         );
