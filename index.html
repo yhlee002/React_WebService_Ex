@@ -18,11 +18,27 @@
       const rootElement = document.getElementById("root");
       const element = <Buttons />;
 
-      const Button = ({ color, onClickButton }) => {
+      const Button = ({
+        color,
+        array,
+        count,
+        setTextColorChange,
+        addNewArray,
+        addCount
+      }) => {
         // 버튼 클릭 시 실행되는 함수
         const handleClickButton = (color) => {
           // 상위 Component의 setTextColor 함수 호출
-          onClickButton(color);
+          setTextColorChange(color);
+
+          const newObject = {
+            key: count,
+            desc: "click " + color + " button"
+          };
+          addNewArray(array.concat(newObject));
+          console.log("array", array);
+
+          addCount(count + 1);
         };
 
         return (
@@ -42,6 +58,9 @@
           { key: 1, color: "blue" },
           { key: 2, color: "green" }
         ]);
+        const [array, setArray] = React.useState([]);
+        const [count, setCount] = React.useState(0);
+
         return (
           <>
             {newState.map((button) => {
@@ -49,11 +68,16 @@
                 <Button
                   key={button.key}
                   color={button.color}
-                  onClickButton={setTextColor}
+                  array={array}
+                  setTextColorChange={setTextColor}
+                  addNewArray={setArray}
+                  addCount={setCount}
+                  count={count}
                 />
               );
             })}
             <h1 style={{ color: textColor }}>color</h1>
+            <p>Click PinkButton</p>
           </>
         );
       }
