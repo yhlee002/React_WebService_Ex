@@ -36,6 +36,7 @@
             desc: "click " + color + " button"
           };
           addNewArray(array.concat(newObject));
+          console.log("count", count);
           addCount(count + 1);
         };
 
@@ -81,8 +82,8 @@
               );
             })}
             <h1 style={{ color: textColor }}>color</h1>
-            {array.map((keys) => (
-              <p key={keys.key}>{keys.desc}</p>
+            {array.map((item) => (
+              <p key={item.key}>{item.desc}</p>
             ))}
           </>
         );
