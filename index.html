@@ -36,10 +36,14 @@
             desc: "click " + color + " button"
           };
           addNewArray(array.concat(newObject));
-          console.log("array", array);
-
           addCount(count + 1);
         };
+
+        console.log("count", count);
+
+        React.useEffect(() => {
+          console.log("count is edited");
+        }, [count]);
 
         return (
           <button
@@ -77,7 +81,9 @@
               );
             })}
             <h1 style={{ color: textColor }}>color</h1>
-            <p>Click PinkButton</p>
+            {array.map((keys) => (
+              <p key={keys.key}>{keys.desc}</p>
+            ))}
           </>
         );
       }
