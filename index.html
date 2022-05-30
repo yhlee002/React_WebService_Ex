@@ -16,86 +16,44 @@
     <div id="root"></div>
     <script type="text/babel">
       const rootElement = document.getElementById("root");
-      /*
-      function draw() {
-        const number = Math.floor(Math.random() * 9 + 1);
-        const element = (
-          <React.Fragment>
-            <button>{number}</button>
-            <div>
-              <p>{number}</p>
-            </div>
-          </React.Fragment>
-        );
-        ReactDOM.render(element, rootElement);
-      }
-      setInterval(draw, 1000);
-      */
+      const element = <Buttons />;
 
-      /* props를 이용하는 형태 (1)
-      function Hello(props) {
-        return <h1>Hello, Component {props.name}</h1>;
-      }
-      const element = <Hello name="component" />;
-      */
+      function Buttons() {
+        // h1 태그의 글자를 바꿔주는 변수값
+        const [textColor, setTextColor] = React.useState("black");
 
-      /* props를 이용하는 형태 (2)  - props라는 키워드 없이 변수명을 바로 사용하기 위해 중괄호 사용
-      function Hello({name}) {
-        return <h1>Hello, Component {name}</h1>;
-      }
-      const element = <Hello name="component" />;
-      */
+        // 버튼 클릭 시 실행되는 함수
+        const handleClickButton = (color) => {
+          console.log("color", color);
+          setTextColor(color);
+        };
 
-      /* props를 이용하는 형태 (3) - (1), (2)와 같은 결과.
-        props를 data와 같이 다른 변수명으로 사용하여 data.name으로 조회해도 해당 값을 가져올 수 있다.
-      function Hello(data) {
-        return <h1>Hello, Component {data.name}</h1>;
-      }
-      const element = <Hello name="component" />;
-      */
-
-      /* 함수형 컴포넌트를 const 키워드를 이용해 정의하는 방식
-      const Hello = (data) => <h1>Hello, Component {data.name}</h1>;
-      const element = <Hello name="component" />;
-      */
-
-      /* ReactDOM.render(element, rootElement); */
-
-      /* 외부에서 state를 받는 경우
-      const state = { name: "button", color: "pink" };
-
-      function Button({ name, color }) {
         return (
-          <button style={{ backgroundColor: color }}>
-            {color}
-            {name}
-          </button>
+          <>
+            <button
+              onClick={() => handleClickButton("pink")}
+              style={{ backgroundColor: "pink" }}
+            >
+              pinkButton
+            </button>
+            <button
+              onClick={() => handleClickButton("blue")}
+              style={{ backgroundColor: "blue" }}
+            >
+              pinkButton
+            </button>
+            <button
+              onClick={() => handleClickButton("green")}
+              style={{ backgroundColor: "green" }}
+            >
+              pinkButton
+            </button>
+            <h1 style={{ color: textColor }}>color</h1>
+          </>
         );
       }
-      */
 
-      // 내부에서 state를 설정하는 경우
-      function Button() {
-        const [color, setColor] = React.useState("green");
-        const [name, setName] = React.useState("button");
-        return (
-          <button style={{ backgroundColor: color }}>
-            {color}
-            {name}
-          </button>
-        );
-      }
-
-      const Buttons = () => (
-        <>
-          <button style={{ backgroundColor: state.color }}>
-            {state.color + state.name}
-          </button>
-          <Button name={state.name} color={state.color} />
-        </>
-      );
-
-      ReactDOM.render(Buttons(), rootElement);
+      ReactDOM.render(element, rootElement);
     </script>
   </body>
 </html>
